@@ -8,9 +8,10 @@
 <body>
     <h1>URL shorter API</h1>
     <hr/>
-    <div style="border: 2px solid black; padding: 20px; margin: 5%;">
+    <div style="border: 2px solid black; padding: 20px; margin: 5%; text-align: center;">
         <form action="/api/shorturl" method="post">
             <label for="userUrl">Enter your URL :</label>
+            <br/>
             <input type="text" name="userUrl" id="userUrl" placeholder="eg. http://nkd.com/pages">
             <br/>
             <input type="submit" value="Short it">
@@ -18,12 +19,12 @@
     </div>
     <br/>
     <br/>
-    <div>
+    <div style="border: 2px solid black; padding: 20px; margin: 5%;text-align: center;">
         <h2>Your shorted your is </h2>
         <br/>
         <p>
             <span>
-                <a href="/api/shorted-url">/api/shorted-url</a>
+                <a href="/api/shorted-url/1">/api/shorted-url/1</a>
             </span>
         </p>
     </div>

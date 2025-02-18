@@ -6,12 +6,14 @@ const dns = require('dns')
 const bodyParser = require('body-parser');
 
 const app = express();
+app.use(cors());
 app.use(cors({optionsSuccessStatus: 200}));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+app.use('/public',express.static(`${process.cwd()}/public`));
 
-let user_url = 'https://www.google.comsss';
+let user_url = '';
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/view/index.html');
@@ -19,23 +21,22 @@ app.get('/',(req,res)=>{
 
 app.post('/api/shorturl',(req,res)=>{
     user_url = req.body.userUrl;
-    console.log(user_url);
-    if(!user_url) return res.status(400).json({error:'invalid url 1'});
+    if(!user_url) return res.status(400).json({error:'invalid url'});
 
     try {
         const hostname = new URL(user_url).hostname;
         dns.lookup(hostname, (err)=>{
-            if(err) return res.status(400).json({error:'invalid url 2'});
+            if(err) return res.status(400).json({error:'invalid url'});
             res.json({original_url:user_url,short_url:1});
         });
     } catch (error) {
-        return res.status(400).json({error:'invalid url catch'});
+        return res.status(400).json({error:'invalid url'});
     }
 
    
 });
 
-app.get('/api/shorted-url',(req,res)=>{
+app.get('/api/shorted-url/1',(req,res)=>{
     res.redirect(user_url);
 });
 
