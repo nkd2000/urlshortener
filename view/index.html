@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL shorter API</title>
+</head>
+<body>
+    <h1>URL shorter API</h1>
+    <hr/>
+    <div style="border: 2px solid black; padding: 20px; margin: 5%;">
+        <form action="/api/shorturl" method="post">
+            <label for="userUrl">Enter your URL :</label>
+            <input type="text" name="userUrl" id="userUrl" placeholder="eg. http://nkd.com/pages">
+            <br/>
+            <input type="submit" value="Short it">
+        </form>
+    </div>
+    <br/>
+    <br/>
+    <div>
+        <h2>Your shorted your is </h2>
+        <br/>
+        <p>
+            <span>
+                <a href="/api/shorted-url">/api/shorted-url</a>
+            </span>
+        </p>
+    </div>
+</body>
+</html>

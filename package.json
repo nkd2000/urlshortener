@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dns": "^0.2.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "valid-url": "^1.0.9"
+  },
+  "name": "urlshortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkd2000/urlshortener.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkd2000/urlshortener/issues"
+  },
+  "homepage": "https://github.com/nkd2000/urlshortener#readme"
+}
