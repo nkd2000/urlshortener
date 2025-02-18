@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/public',express.static(`${process.cwd()}/public`));
 
-let user_url = '';
+let user_url = '/';
+let valid_url = false;
 
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/view/index.html');
@@ -28,6 +29,7 @@ app.post('/api/shorturl',(req,res)=>{
         dns.lookup(hostname, (err)=>{
             if(err) return res.status(400).json({error:'invalid url'});
             res.json({original_url:user_url,short_url:1});
+            valid_url = true;
         });
     } catch (error) {
         return res.status(400).json({error:'invalid url'});
@@ -36,8 +38,9 @@ app.post('/api/shorturl',(req,res)=>{
    
 });
 
-app.get('/api/shorted-url/1',(req,res)=>{
-    res.redirect(user_url);
+app.get('/api/shorturl/1',(req,res)=>{
+    if(valid_url) res.redirect(user_url);
+    else res.redirect('/');
 });
 
 const listner = app.listen(process.env.PORT || 5000, ()=>{console.log(`App is listening on port ${listner.address().port}`)});
