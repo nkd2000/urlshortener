@@ -19,14 +19,20 @@
     </div>
     <br/>
     <br/>
-    <div style="border: 2px solid black; padding: 20px; margin: 5%;text-align: center;">
+    <!-- <div style="border: 2px solid black; padding: 20px; margin: 5%;text-align: center;">
         <h2>Your shorted your is </h2>
         <br/>
         <p>
             <span>
-                <a href="/api/shorturl/1">/api/shortedurl/1</a>
+                <a id="newUrl href="/api/shorturl/1">/api/shortedurl/1</a>
             </span>
         </p>
-    </div>
+    </div> -->
 </body>
+<script>
+    function updateUrl(url){
+        iurl = document.getElementById('newUrl');
+        iurl.herf = url
+    }
+</script>
 </html>
