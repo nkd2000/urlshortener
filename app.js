@@ -16,6 +16,7 @@ app.use('/public',express.static(`${process.cwd()}/public`));
 let user_url = '/';
 let valid_url = false;
 let urlId = 0;
+let key = 0;
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/view/index.html');
 });
@@ -28,7 +29,9 @@ app.post('/api/shorturl',(req,res)=>{
         const hostname = new URL(user_url).hostname;
         dns.lookup(hostname, (err)=>{
             if(err) return res.json({error:'invalid url'});
-            urlId = Math.round(Math.random()*1000);
+            urlId = req.headers['content-length'];
+            key = urlId*2;
+            console.log(urlId);
             res.json({original_url:user_url,short_url:urlId});
             valid_url = true;
         });
@@ -39,7 +42,9 @@ app.post('/api/shorturl',(req,res)=>{
    
 });
 
-app.get('/api/shorturl/:urlId',(req,res)=>{
+app.get('/api/shorturl/:uId',(req,res)=>{
+    console.log(": "+urlId+ " :: "+key+" : "+key/2);
+    console.log(urlId === req.params.uId);
     if(valid_url) return res.redirect(user_url);
     else return res.json({error:'invalid url'});
 });
