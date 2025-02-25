@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use('/public',express.static(`${process.cwd()}/public`));
 
 let user_url = '/';
-let valid_url = false;
 let urlId = 0;
 let key = 0;
 app.get('/',(req,res)=>{
@@ -23,29 +22,24 @@ app.get('/',(req,res)=>{
 
 app.post('/api/shorturl',(req,res)=>{
     user_url = req.body.userUrl;
-    if(!user_url) return res.json({error:'invalid url'});
+    if(!user_url) return res.send({error:'invalid url'});
 
     try {
         const hostname = new URL(user_url).hostname;
         dns.lookup(hostname, (err)=>{
-            if(err) return res.json({error:'invalid url'});
+            if(err) return res.send({error:'invalid url'});
             urlId = req.headers['content-length'];
-            key = urlId*2;
-            console.log(urlId);
-            res.json({original_url:user_url,short_url:urlId});
-            valid_url = true;
-        });
-    } catch (error) {
-        return res.json({error:'invalid url'});
+            return res.send({original_url:user_url,short_url:urlId});
+        }); 
+    } catch (err) {
+        return res.send({error:'invalid url'});
     }
 
    
 });
 
 app.get('/api/shorturl/:uId',(req,res)=>{
-    console.log(": "+urlId+ " :: "+key+" : "+key/2);
-    console.log(urlId === req.params.uId);
-    if(valid_url) return res.redirect(user_url);
+    if(parseInt(urlId) === parseInt(req.params.uId)) return res.redirect(user_url);
     else return res.json({error:'invalid url'});
 });
 
